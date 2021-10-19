@@ -2,7 +2,7 @@ package Chess;
 
 import java.util.ArrayList;
 
-abstract class Board {
+class Board {
     private boolean colorIsWhite = true;
     public static ArrayList<ArrayList<Piece>> field = new ArrayList<ArrayList<Piece>>();
     public ArrayList<Piece> sub_field = new ArrayList<>();
