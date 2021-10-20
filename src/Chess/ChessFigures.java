@@ -13,6 +13,7 @@ class Piece {
         this.symbol = symbol;
     }
 
+
     public static boolean can_move(Board board, int x, int y, int toX, int toY){
         if (!correct_coords(x, y) || !correct_coords(x, y)) return false;
         if (x == toX && y == toY)return false;

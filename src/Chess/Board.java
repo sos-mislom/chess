@@ -11,10 +11,9 @@ class Board {
     public Board(){
         for (int i = 0; i < 8; i++) {
             this.sub_field.add(null);
-            for (int j = 0; j < 8; j++) {
-                this.field.add(this.sub_field);
-            }
-
+        }
+        for (int j = 0; j < 8; j++) {
+            this.field.add(this.sub_field);
         }
     }
     public String cell(int x, int y){
