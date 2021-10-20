@@ -4,16 +4,40 @@ import java.util.ArrayList;
 
 class Board {
     private boolean colorIsWhite = true;
-    public static ArrayList<ArrayList<Piece>> field = new ArrayList<ArrayList<Piece>>();
-    public ArrayList<Piece> sub_field = new ArrayList<>();
+    static ArrayList<ArrayList<Piece>> field = new ArrayList<>();
+
+    static ArrayList<Piece> sub_fields_of_white = new ArrayList<>();
+    static ArrayList<Piece> sub_fields_of_black = new ArrayList<>();
+
     private int x;
     private int y;
     public Board(){
+        create_array(true, sub_fields_of_white);
+        create_array(false, sub_fields_of_black);
+
         for (int i = 0; i < 8; i++) {
-            this.sub_field.add(null);
+            for (int j = 0; j < 8; j++) {
+                if (i == 0){
+                    field.get(i).set(j, sub_fields_of_white.get(j));}
+                else if (i == 1){
+                    field.get(i).set(j, new Pawn(true));}
+                else if (i == 6){
+                    field.get(i).set(j, new Pawn(false) );}
+                else if (i == 7){
+                    field.get(i).set(j, sub_fields_of_black.get(j));}
+            }
         }
-        for (int j = 0; j < 8; j++) {
-            this.field.add(this.sub_field);
+    }
+    static void create_array(boolean color, ArrayList<Piece> arr){
+        for (int i = 0; i < 8; i++) {
+            arr.add(new Rook(color));
+            arr.add(new Knight(color));
+            arr.add(new Bishop(color));
+            arr.add(new Queen(color));
+            arr.add(new King(color));
+            arr.add(new Bishop(color));
+            arr.add(new Knight(color));
+            arr.add(new Rook(color));
         }
     }
     public String cell(int x, int y){
