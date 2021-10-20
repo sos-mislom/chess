@@ -1,6 +1,17 @@
 package Chess;
 
 class Pawn extends Chess.Piece{
+
+    public Pawn(boolean color) {
+        super(color, symbol(color));
+    }
+
+    private static char symbol(boolean color){
+        if (color){
+            return '\u2659';
+        }else return '\u265F';
+    }
+
     public Pawn(boolean color, char symbol) {
         super(color, symbol);
     }
