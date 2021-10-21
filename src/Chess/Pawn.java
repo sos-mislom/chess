@@ -13,10 +13,12 @@ class Pawn extends Chess.Piece{
     }
     public static boolean can_move(Board board, int x, int y, int toX, int toY) {
         int direction= 0, start_x =0 ;
-        if (!(can_move( board, x, y, toX, toY))){
+        if (!(Piece.can_move( board, x, y, toX, toY))){
             return false;
         }
-        if (y != toY){return false;}
+        if (y != toY){
+            return false;
+        }
         if (colorIsWhite) {
              direction = 1;
              start_x = 1;

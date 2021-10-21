@@ -5,7 +5,6 @@ import java.util.ArrayList;
 class Board {
     private boolean colorIsWhite = true;
     static ArrayList<ArrayList<Piece>> field = new ArrayList<>();
-
     static ArrayList<Piece> sub_fields_of_white = new ArrayList<>();
     static ArrayList<Piece> sub_fields_of_black = new ArrayList<>();
 
@@ -49,7 +48,7 @@ class Board {
         if (colorIsWhite){
             c = 'w';
         } else c = 'b';
-        return String.valueOf(c + piece.get_symbol());
+        return c + " " + piece.get_symbol();
     }
     public Piece get_piece(int x, int y){
             if (correct_coords(x, y)){
@@ -61,4 +60,23 @@ class Board {
             return true;
         } else return false;
     }
+    public boolean move_piece(Board board, int x, int y, int toX, int toY) {
+        if (!correct_coords(x, y) || !correct_coords(toX, toY)) return false;
+        if (x == toX && y == toY) return false;
+        Piece piece = this.field.get(x).get(y);
+        if (piece == null) return false;
+        if (!piece.can_move(this, x, y, toX, toY)) return false;
+
+        this.field.get(x).set(y, null);
+        this.field.get(toX).set(toY, piece);
+
+        piece.set_moved();
+        this.colorIsWhite = opponent(this.colorIsWhite);
+        return true;
+    }
+
+    private boolean opponent(boolean colorIsWhite) {
+        return !colorIsWhite;
+    }
+
 }
