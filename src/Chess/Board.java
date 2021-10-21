@@ -7,37 +7,47 @@ class Board {
     ArrayList<ArrayList<Piece>> field = new ArrayList<>();
     ArrayList<Piece> sub_fields_of_white = new ArrayList<>();
     ArrayList<Piece> sub_fields_of_black = new ArrayList<>();
-
-    private int x;
-    private int y;
+    ArrayList<Piece> sub_fields_of_white_pawn = new ArrayList<>();
+    ArrayList<Piece> sub_fields_of_black_pawn = new ArrayList<>();
     public Board(){
+        for (int i = 0; i < 8; i++) {
+            field.add(null);
+        }
         create_array(true, sub_fields_of_white);
         create_array(false, sub_fields_of_black);
-
+        create_array_of_pawn(true, sub_fields_of_white_pawn);
+        create_array_of_pawn(false, sub_fields_of_black_pawn);
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
                 if (i == 0){
-                    field.get(i).set(j, sub_fields_of_white.get(j));}
+                    field.add(sub_fields_of_white);}
                 else if (i == 1){
-                    field.get(i).set(j, new Pawn(true));}
+                    field.add(sub_fields_of_white_pawn);}
                 else if (i == 6){
-                    field.get(i).set(j, new Pawn(false) );}
+                    field.add(sub_fields_of_black_pawn);}
                 else if (i == 7){
-                    field.get(i).set(j, sub_fields_of_black.get(j));}
-            }
+                    field.add(sub_fields_of_black);}
+
         }
     }
+    static void create_array_of_pawn(boolean color, ArrayList<Piece> arr){
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+        arr.add(new Pawn(color));
+    }
     static void create_array(boolean color, ArrayList<Piece> arr){
-        for (int i = 0; i < 8; i++) {
-            arr.add(new Rook(color));
-            arr.add(new Knight(color));
-            arr.add(new Bishop(color));
-            arr.add(new Queen(color));
-            arr.add(new King(color));
-            arr.add(new Bishop(color));
-            arr.add(new Knight(color));
-            arr.add(new Rook(color));
-        }
+        arr.add(new Rook(color));
+        arr.add(new Knight(color));
+        arr.add(new Bishop(color));
+        arr.add(new Queen(color));
+        arr.add(new King(color));
+        arr.add(new Bishop(color));
+        arr.add(new Knight(color));
+        arr.add(new Rook(color));
     }
     public Object cell(int x, int y){
         Piece piece = this.field.get(x).get(y);
@@ -62,8 +72,8 @@ class Board {
         if (piece == null) return false;
         if (!piece.can_move(this, x, y, toX, toY)) return false;
 
-        this.field.get(x).set(y, null);
-        this.field.get(toX).set(toY, piece);
+        this.field.get(x).add(y, null);
+        this.field.get(toX).add(toY, piece);
 
         piece.set_moved();
         this.colorIsWhite = opponent(this.colorIsWhite);
