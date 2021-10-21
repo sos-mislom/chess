@@ -27,7 +27,6 @@ public class Rook extends Chess.Piece{
             if (toX >= x) {
                 step = 1;
             } else step = -1;
-
             for (int i = y + step; i < toY; i += step) {
                 if (!(board.get_piece(x, i) == null)) {
                     return false;

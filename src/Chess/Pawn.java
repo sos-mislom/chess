@@ -35,4 +35,5 @@ class Pawn extends Chess.Piece{
             return false;
         }
     }
+
 }

@@ -27,6 +27,7 @@ public class Bishop extends Chess.Piece{
         }
         return false;
     }
+
     private static int abs(int n){
         if (n > 0) {return n;}
         else return -n;

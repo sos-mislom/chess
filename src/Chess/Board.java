@@ -74,7 +74,6 @@ class Board {
         this.colorIsWhite = opponent(this.colorIsWhite);
         return true;
     }
-
     private boolean opponent(boolean colorIsWhite) {
         return !colorIsWhite;
     }
