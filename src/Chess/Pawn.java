@@ -1,6 +1,6 @@
 package Chess;
 
-class Pawn extends Chess.Piece{
+class Pawn extends Piece{
 
     public Pawn(boolean color) {
         super(color, symbol(color));

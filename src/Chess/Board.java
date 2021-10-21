@@ -39,16 +39,11 @@ class Board {
             arr.add(new Rook(color));
         }
     }
-    public String cell(int x, int y){
+    public Object cell(int x, int y){
         Piece piece = this.field.get(x).get(y);
         if (piece == null){
             return "  ";}
-        boolean colorIsWhite = piece.get_color();
-        char c;
-        if (colorIsWhite){
-            c = 'w';
-        } else c = 'b';
-        return c + " " + piece.get_symbol();
+        return piece.get_symbol();
     }
     public Piece get_piece(int x, int y){
             if (correct_coords(x, y)){

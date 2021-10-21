@@ -8,24 +8,20 @@ class Piece {
     private static boolean moved;
 
     public Piece(boolean color, char symbol){
-        this.colorIsWhite = color;
-        this.moved = false;
-        this.symbol = symbol;
+        colorIsWhite = color;
+        moved = false;
+        Piece.symbol = symbol;
     }
     public static boolean can_move(Board board, int x, int y, int toX, int toY){
         if (!correct_coords(x, y) || !correct_coords(x, y)) return false;
         if (x == toX && y == toY)return false;
-        if (Objects.equals(board.cell(toX, toY).substring(1), new String("  "))){
-            if (board.get_piece(toX, toY).get_color() == colorIsWhite){
-                return false;
-            }
+        if (Objects.equals(board.cell(toX, toY), "  ")){
+            return board.get_piece(toX, toY).get_color() != colorIsWhite;
         }
         return true;
     }
     public static boolean correct_coords(int x, int y) {
-        if ((x >= 0 && x < 8) && (y >= 0 && y < 8)) {
-            return true;
-        } else return false;
+        return (x >= 0 && x < 8) && (y >= 0 && y < 8);
     }
 
     public static boolean get_color(){
