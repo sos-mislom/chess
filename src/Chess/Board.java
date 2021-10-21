@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 class Board {
     private boolean colorIsWhite = true;
-    static ArrayList<ArrayList<Piece>> field = new ArrayList<>();
-    static ArrayList<Piece> sub_fields_of_white = new ArrayList<>();
-    static ArrayList<Piece> sub_fields_of_black = new ArrayList<>();
+    ArrayList<ArrayList<Piece>> field = new ArrayList<>();
+    ArrayList<Piece> sub_fields_of_white = new ArrayList<>();
+    ArrayList<Piece> sub_fields_of_black = new ArrayList<>();
 
     private int x;
     private int y;
