@@ -1,15 +1,10 @@
 package Chess;
 
 public class Queen extends Piece{
-    public Queen(boolean color) {
-        super(color, symbol(color));
+    public Queen(boolean colorIsWhite) {
+        super(colorIsWhite, (char)(colorIsWhite ? '♕' : '♛'));
     }
 
-    private static char symbol(boolean color){
-        if (color){
-            return '\u2655';
-        }else return '\u265B';
-    }
     public static boolean can_move(Board board, int x, int y, int toX, int toY){
         int stepx =1, stepy=1;
         if (Piece.can_move(board, x, y, toX, toY)) {

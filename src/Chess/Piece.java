@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Piece {
     public static boolean colorIsWhite;
-    private static char symbol;
+    private char symbol;
     private static boolean moved;
 
     public Piece(boolean color, char symbol){
-        colorIsWhite = color;
-        moved = false;
-        Piece.symbol = symbol;
+        this.colorIsWhite = color;
+        this.moved = false;
+        this.symbol = symbol;
     }
     public static boolean can_move(Board board, int x, int y, int toX, int toY){
         if (!correct_coords(x, y) || !correct_coords(x, y)) return false;
@@ -27,8 +27,8 @@ public class Piece {
     public static boolean get_color(){
         return colorIsWhite;
     }
-    public static char get_symbol(){
-        return symbol;
+    public char get_symbol(){
+        return this.symbol;
     }
     public static boolean can_attack(Board board, int x, int y, int toX, int toY){
         return can_move(board, x, toX, y, toY);

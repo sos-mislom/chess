@@ -30,7 +30,6 @@ class Board {
                     field.set(i,sub_fields_of_black_pawn);}
                 else if (i == 7){
                     field.set(i,sub_fields_of_black);}
-            System.out.println(field);
         }
     }
     static void create_array_of_pawn(boolean color, ArrayList<Piece> arr){

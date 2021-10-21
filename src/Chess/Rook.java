@@ -1,15 +1,10 @@
 package Chess;
 
 public class Rook extends Piece{
-    public Rook(boolean color) {
-        super(color, symbol(color));
+    public Rook(boolean colorIsWhite) {
+        super(colorIsWhite, (char)(colorIsWhite ? '♖' : '♜'));
     }
 
-    private static char symbol(boolean color){
-        if (color){
-            return '\u2656';
-        }else return '\u265C';
-    }
     public static boolean can_move(Board board, int x, int y, int toX, int toY) {
         int step=0;
         if (!(Piece.can_move(board, x, y, toX, toY))) {

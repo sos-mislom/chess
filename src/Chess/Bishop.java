@@ -1,8 +1,8 @@
 package Chess;
 
 public class Bishop extends Piece{
-    public Bishop(boolean color) {
-        super(color, symbol(color));
+    public Bishop(boolean colorIsWhite) {
+        super(colorIsWhite, (char)(colorIsWhite ? '♗' : '♝'));
     }
 
     private static char symbol(boolean color){
