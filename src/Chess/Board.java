@@ -10,8 +10,12 @@ class Board {
     ArrayList<Piece> sub_fields_of_white_pawn = new ArrayList<>();
     ArrayList<Piece> sub_fields_of_black_pawn = new ArrayList<>();
     public Board(){
+        ArrayList<Piece> novi = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            field.add(null);
+            novi.add(null);
+        }
+        for (int i = 0; i < 8; i++) {
+            field.add(novi);
         }
         create_array(true, sub_fields_of_white);
         create_array(false, sub_fields_of_black);
@@ -19,25 +23,20 @@ class Board {
         create_array_of_pawn(false, sub_fields_of_black_pawn);
         for (int i = 0; i < 8; i++) {
                 if (i == 0){
-                    field.add(sub_fields_of_white);}
+                    field.set(i, sub_fields_of_white);}
                 else if (i == 1){
-                    field.add(sub_fields_of_white_pawn);}
+                    field.set(i,sub_fields_of_white_pawn);}
                 else if (i == 6){
-                    field.add(sub_fields_of_black_pawn);}
+                    field.set(i,sub_fields_of_black_pawn);}
                 else if (i == 7){
-                    field.add(sub_fields_of_black);}
-
+                    field.set(i,sub_fields_of_black);}
+            System.out.println(field);
         }
     }
     static void create_array_of_pawn(boolean color, ArrayList<Piece> arr){
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
-        arr.add(new Pawn(color));
+        for (int i = 0; i < 8; i++) {
+            arr.add(new Pawn(color));
+        }
     }
     static void create_array(boolean color, ArrayList<Piece> arr){
         arr.add(new Rook(color));
@@ -72,8 +71,8 @@ class Board {
         if (piece == null) return false;
         if (!piece.can_move(this, x, y, toX, toY)) return false;
 
-        this.field.get(x).add(y, null);
-        this.field.get(toX).add(toY, piece);
+        this.field.get(x).set(y, null);
+        this.field.get(toX).set(toY, piece);
 
         piece.set_moved();
         this.colorIsWhite = opponent(this.colorIsWhite);
