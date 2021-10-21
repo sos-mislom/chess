@@ -2,7 +2,7 @@ package Chess;
 
 import java.util.Objects;
 
-class Piece {
+public class Piece {
     public static boolean colorIsWhite;
     private static char symbol;
     private static boolean moved;
