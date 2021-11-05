@@ -16,7 +16,7 @@ public class Main {
             if (board.current_player_color()){
                 System.out.println("ХОД БЕЛЫХ");
             }else System.out.println("ХОД ЧЕРНЫХ");
-            String command = input("!Введите команду \n! ");
+            String command = input("! Введите команду \n! ");
             if (command.equals("exit")){
                 break;
             }else{
@@ -28,7 +28,6 @@ public class Main {
                     toX =(int)(c[4]) - 49;
                     toY = (int)(c[3]) - 97;
                     System.out.println(x + " " + y + " " + toX + " " + toY);
-
                     if (board.move_piece(x, y, toX, toY)){ System.out.println("Ход успешен");}
                     else{
                         System.out.println("Координаты некорректы! Попробуйте другой ход!");
@@ -48,7 +47,7 @@ public class Main {
                 if (board.cell(i - 1, j) == "  "){
                     System.out.print("| " + board.cell(i - 1, j) + " ");
                 }
-                else System.out.print("|  "+ board.cell(i - 1, j) + "  ");
+                else System.out.print("|   "+ board.cell(i - 1, j) + "  ");
             }
             System.out.println("|");
             System.out.println("     +----+----+----+----+----+----+----+----+");

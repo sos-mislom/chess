@@ -5,11 +5,6 @@ public class Bishop extends Piece{
         super(colorIsWhite, (char)(colorIsWhite ? '♗' : '♝'));
     }
 
-    private static char symbol(boolean color){
-        if (color){
-            return '\u2657';
-        }else return '\u265D';
-    }
     public boolean can_move(Board board, int x, int y, int toX, int toY){
         int stepx =1, stepy=1;
         if (!super.can_move(board, x, y, toX, toY)) {

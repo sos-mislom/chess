@@ -59,20 +59,24 @@ class Board {
             }else return null;
     }
     public boolean correct_coords(int x, int y) {
-        if ((x >= 0 && x < 8) && (y >= 0 && y < 8)) {
-            return true;
-        } else return false;
+        return ((0 <= x || x < 8) && (0 <= y || y < 8));
     }
     public boolean move_piece(int x, int y, int toX, int toY) {
         if (!correct_coords(x, y) || !correct_coords(toX, toY)) return false;
         if (x == toX && y == toY) return false;
         Piece piece = this.field.get(x).get(y);
         if (piece == null) return false;
-        // if (piece.get_color() != this.colorIsWhite) return true;
+        if (piece.get_color() != this.colorIsWhite) return true;
         if (piece.can_move(this, x, y, toX, toY)) return false;
         this.field.get(x).set(y, null);
+        for (ArrayList<Piece> lis : this.field){
+            System.out.println(lis);
+        }
+        System.out.println("\n");
         this.field.get(toX).set(toY, piece);
-
+        for (ArrayList<Piece> lis : this.field){
+            System.out.println(lis);
+        }
         piece.set_moved();
         this.colorIsWhite = opponent(this.colorIsWhite);
         return true;

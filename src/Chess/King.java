@@ -2,7 +2,7 @@ package Chess;
 
 public class King extends Piece{
     public King(boolean colorIsWhite) {
-        super(colorIsWhite, (char)(colorIsWhite ? '♔' : '♚'));
+        super(colorIsWhite, colorIsWhite ? '♔' : '♚');
     }
 
     public boolean can_move(Board board, int x, int y, int toX, int toY){
