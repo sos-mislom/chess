@@ -5,10 +5,10 @@ public class Queen extends Piece{
         super(colorIsWhite, (char)(colorIsWhite ? '♕' : '♛'));
     }
 
-    public static boolean can_move(Board board, int x, int y, int toX, int toY){
+    public boolean can_move(Board board, int x, int y, int toX, int toY){
         int stepx =1, stepy=1;
-        if (Piece.can_move(board, x, y, toX, toY)) {
-            return true;
+        if (!super.can_move(board, x, y, toX, toY)) {
+            return false;
         }
         if (abs(toX - x) == abs(toY - y)){
             if (toY >= y) {
@@ -18,7 +18,7 @@ public class Queen extends Piece{
                 stepy = 1;
             } else stepy = -1;
             for (int i = 1; i < abs(toX - x); i++) {
-                return board.get_piece(x + i * stepy, y + i * stepx) == null;
+                return board.get_piece(x + i * stepy, y + i * stepx) != null;
             }
         }
 
@@ -29,7 +29,7 @@ public class Queen extends Piece{
             } else step = -1;
             for (int i = x + step; i < toX; i += step) {
                 if (!(board.get_piece(i, y) == null)) {
-                    return false;
+                    return true;
                 }
             }
             if (toX >= x) {
@@ -37,12 +37,12 @@ public class Queen extends Piece{
             } else step = -1;
             for (int i = y + step; i < toY; i += step) {
                 if (!(board.get_piece(x, i) == null)) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     private static int abs(int n){
         if (n > 0) {return n;}

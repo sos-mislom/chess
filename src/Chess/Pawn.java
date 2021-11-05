@@ -6,11 +6,11 @@ class Pawn extends Piece{
         super(colorIsWhite, (char)(colorIsWhite ? '♙' : '♟'));
     }
 
-    public static boolean can_move(Board board, int x, int y, int toX, int toY) {
+    public boolean can_move(Board board, int x, int y, int toX, int toY) {
         int direction= 0, start_x =0 ;
-        if (Piece.can_move(board, x, y, toX, toY)) {
+        if (!super.can_move(board, x, y, toX, toY)) {
             if (y == toY) {
-                if (colorIsWhite) {
+                if (this.colorIsWhite) {
                     direction = 1;
                     start_x = 1;
                 } else {
@@ -18,16 +18,16 @@ class Pawn extends Piece{
                     start_x = 6;
                 }
                 if (x + direction != toX) {
-                    return x == start_x
-                            && x + 2 * direction == toX
-                            && board.field.get(x + direction).get(y) == null;
+                    return x != start_x
+                            || x + 2 * direction != toX
+                            || board.field.get(x + direction).get(y) != null;
                 }
-                return true;
-            } else {
                 return false;
+            } else {
+                return true;
             }
         } else {
-            return false;
+            return true;
         }
     }
 

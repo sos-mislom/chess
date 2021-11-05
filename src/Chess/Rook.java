@@ -5,10 +5,10 @@ public class Rook extends Piece{
         super(colorIsWhite, (char)(colorIsWhite ? '♖' : '♜'));
     }
 
-    public static boolean can_move(Board board, int x, int y, int toX, int toY) {
+    public boolean can_move(Board board, int x, int y, int toX, int toY) {
         int step=0;
-        if (!(Piece.can_move(board, x, y, toX, toY))) {
-            return false;
+        if (!super.can_move(board, x, y, toX, toY)) {
+            return true;
         }
         if (x == toX || y == toY) {
             if (toY >= y) {
@@ -16,7 +16,7 @@ public class Rook extends Piece{
             } else step = -1;
             for (int i = x + step; i < toX; i += step) {
                 if (!(board.get_piece(i, y) == null)) {
-                    return false;
+                    return true;
                 }
             }
             if (toX >= x) {
@@ -24,12 +24,12 @@ public class Rook extends Piece{
             } else step = -1;
             for (int i = y + step; i < toY; i += step) {
                 if (!(board.get_piece(x, i) == null)) {
-                    return false;
+                    return true;
                 }
             }
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 }

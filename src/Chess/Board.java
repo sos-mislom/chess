@@ -63,13 +63,13 @@ class Board {
             return true;
         } else return false;
     }
-    public boolean move_piece(Board board, int x, int y, int toX, int toY) {
+    public boolean move_piece(int x, int y, int toX, int toY) {
         if (!correct_coords(x, y) || !correct_coords(toX, toY)) return false;
         if (x == toX && y == toY) return false;
         Piece piece = this.field.get(x).get(y);
         if (piece == null) return false;
-        if (!piece.can_move(this, x, y, toX, toY)) return false;
-
+        // if (piece.get_color() != this.colorIsWhite) return true;
+        if (piece.can_move(this, x, y, toX, toY)) return false;
         this.field.get(x).set(y, null);
         this.field.get(toX).set(toY, piece);
 
@@ -81,4 +81,7 @@ class Board {
         return !colorIsWhite;
     }
 
+    public boolean current_player_color() {
+        return this.colorIsWhite;
+    }
 }
