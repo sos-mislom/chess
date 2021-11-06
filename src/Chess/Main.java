@@ -27,7 +27,6 @@ public class Main {
                     y = (int)(c[0]) - 97;
                     toX =(int)(c[4]) - 49;
                     toY = (int)(c[3]) - 97;
-                    System.out.println(x + " " + y + " " + toX + " " + toY);
                     if (board.move_piece(x, y, toX, toY)){ System.out.println("Ход успешен");}
                     else{
                         System.out.println("Координаты некорректы! Попробуйте другой ход!");

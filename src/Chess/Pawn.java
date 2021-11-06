@@ -11,15 +11,15 @@ class Pawn extends Piece{
         if (!super.can_move(board, x, y, toX, toY)) {
             return false;
         }
+        if (y != toY) {
+            return false;
+        }
         if (this.colorIsWhite) {
             direction = 1;
             start_x = 1;
         } else {
             direction = -1;
             start_x = 6;
-        }
-        if (y != toY) {
-            return false;
         }
         if (x + direction == toX) {
             return true;

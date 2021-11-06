@@ -10,12 +10,12 @@ class Board {
     ArrayList<Piece> sub_fields_of_white_pawn = new ArrayList<>();
     ArrayList<Piece> sub_fields_of_black_pawn = new ArrayList<>();
     public Board(){
-        ArrayList<Piece> novi = new ArrayList<>();
+        ArrayList<Piece> sub_field_of_null = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            novi.add(null);
+            sub_field_of_null.add(null);
         }
         for (int i = 0; i < 8; i++) {
-            field.add(novi);
+            field.add(new ArrayList<>(sub_field_of_null));
         }
         create_array(true, sub_fields_of_white);
         create_array(false, sub_fields_of_black);
@@ -66,17 +66,12 @@ class Board {
         if (x == toX && y == toY) return false;
         Piece piece = this.field.get(x).get(y);
         if (piece == null) return false;
-        if (piece.get_color() != this.colorIsWhite) return true;
-        if (piece.can_move(this, x, y, toX, toY)) return false;
+        System.out.println(x+ " " + y + " " +toX+ " " + toY);
+        if (!piece.can_move(this, x, y, toX, toY)) return false;
+
         this.field.get(x).set(y, null);
-        for (ArrayList<Piece> lis : this.field){
-            System.out.println(lis);
-        }
-        System.out.println("\n");
         this.field.get(toX).set(toY, piece);
-        for (ArrayList<Piece> lis : this.field){
-            System.out.println(lis);
-        }
+
         piece.set_moved();
         this.colorIsWhite = opponent(this.colorIsWhite);
         return true;
