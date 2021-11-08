@@ -30,7 +30,7 @@ public class Queen extends Piece{
                 }
             }
 
-            if (toY >= y) {step = -1;}else step = -1;
+            if (toY >= y) {step = 1;}else step = -1;
 
             for (int i = y + step; i < toY; i += step) {
                 if (!(board.get_piece(x, i) == null)) {
