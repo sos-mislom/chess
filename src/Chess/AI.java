@@ -6,12 +6,11 @@ import java.util.*;
 
 
 public class AI {
-    public static Map<Pair<Integer, Integer>, Piece> board2dict(Board board, boolean exceptNone){
+    public static Map<Pair<Integer, Integer>, Piece> board2dict(Board board){
         Map<Pair<Integer, Integer>, Piece> list_of_figures = new Hashtable<>();
-
-        for (int x = 1; x < 8; x++) {
-            for (int y = 1; y < 8; y++) {
-                if(!exceptNone || board.field.get(y).get(x) != null) {
+        for (int x = 0; x < board.field.get(0).size(); x++) {
+            for (int y = 0; y < board.field.size(); y++) {
+                if(board.field.get(y).get(x) != null) {
                     list_of_figures.put(new Pair<>(x, y), board.field.get(y).get(x));
                 }
             }
@@ -23,7 +22,7 @@ public class AI {
     public static Map<Pair<Integer, Integer>, Piece> leaveOnly(Map<Pair<Integer, Integer>, Piece> field, boolean colorIsWhite) {
         Map<Pair<Integer, Integer>, Piece> rip_figures = new Hashtable<>();
         for (Pair<Integer, Integer> k: field.keySet()){
-            if (field.get(k).get_color() == colorIsWhite) {
+            if (field.get(k).get_color() != colorIsWhite) {
                 rip_figures.put(k, field.get(k));
             }
         }
@@ -31,16 +30,17 @@ public class AI {
     }
 
     public static List<Pair<Pair<Integer, Integer>, Pair<Integer, Integer>>> getPossibleMoves(Board board, boolean colorIsWhite) {
-        Map<Pair<Integer, Integer>, Piece> field = leaveOnly(board2dict(board, true), colorIsWhite);
+        Map<Pair<Integer, Integer>, Piece> field = leaveOnly(board2dict(board), colorIsWhite);
         List<Pair<Pair<Integer, Integer>, Pair<Integer, Integer>>> d = new ArrayList<>();
-
-        for (Pair<Integer, Integer> coor : field.keySet()){
+        for (Pair<Integer, Integer> coord : field.keySet()){
             for (int pos_x = 0; pos_x < 8; pos_x++){
                 for (int pos_y = 0; pos_y < 8; pos_y++){
-                    Pair<Integer, Integer> pos_coor = new Pair<>(pos_x, pos_y);
-                    if (coor.equals(pos_coor)) continue;
-                    if (field.get(coor).can_move(board, coor.getValue(), coor.getKey(), pos_y, pos_x)){
-                        d.add(new Pair<>(coor, pos_coor));
+                    Pair<Integer, Integer> pos_coord = new Pair<>(pos_x, pos_y);
+                    if (field.containsKey(pos_coord)) {
+                        continue;
+                    }
+                    if (field.get(coord).can_move(board, coord.getValue(), coord.getKey(), pos_y, pos_x)){
+                        d.add(new Pair<>(coord, pos_coord));
                     }
                 }
             }

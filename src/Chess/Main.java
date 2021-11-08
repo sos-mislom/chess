@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board();
         while (true){
+            boolean flag = true;
             int x=0, y=0, toX=0, toY = 0;
             sout_board(board);
             System.out.println("Команды:");
@@ -29,17 +30,18 @@ public class Main {
                     y = (int)(c[0]) - 97;
                     toX =(int)(c[4]) - 49;
                     toY = (int)(c[3]) - 97;
-                    if (board.move_piece(x, y, toX, toY)){ System.out.println("Ход успешен");}
+                    if (board.move_piece(x, y, toX, toY)){ System.out.println("Ход успешен");flag = true;}
                     else{
                         System.out.println("Координаты некорректы! Попробуйте другой ход!");
+                        flag = false;
                     }
                 } else {System.out.println("Недопустимая команда! Попробуйте еще раз!");}
             }
-            Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> move = AI.bestMove(board, 1);
-            System.out.println(move);
-
-            boolean s = board.move_piece( move.getKey().getKey(), move.getKey().getValue(),  move.getValue().getKey(), move.getValue().getValue());
-            System.out.println(s);
+            if (flag) {
+                Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> move = AI.bestMove(board, 1);
+                boolean s = board.move_piece(move.getKey().getValue(), move.getKey().getKey(), move.getValue().getValue(), move.getValue().getKey());
+                System.out.println(s);
+            }
         }
 
         sout_board(board);
@@ -57,7 +59,7 @@ public class Main {
             System.out.println("|");
             System.out.println("     +----+----+----+----+----+----+----+----+");
         }
-        System.out.print("      ");
+        System.out.print("        ");
         for (int i = 0; i < 8; i++) {
             System.out.print((char)(i + 65) + "    ");
         }
