@@ -1,5 +1,7 @@
 package Chess;
 
+import javafx.util.Pair;
+
 import java.util.Scanner;
 
 public class Main {
@@ -33,7 +35,11 @@ public class Main {
                     }
                 } else {System.out.println("Недопустимая команда! Попробуйте еще раз!");}
             }
+            Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> move = AI.bestMove(board, 1);
+            System.out.println(move);
 
+            boolean s = board.move_piece( move.getKey().getKey(), move.getKey().getValue(),  move.getValue().getKey(), move.getValue().getValue());
+            System.out.println(s);
         }
 
         sout_board(board);
