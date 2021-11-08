@@ -10,7 +10,7 @@ public class Rook extends Piece{
         if (!super.can_move(board, x, y, toX, toY)) {
             return false;
         }
-        if (x != toX || y != toY) { return false;}
+        if (x != toX && y != toY) { return false;}
         if (toX >= x) {step = 1;} else step = -1;
 
         for (int i = x + step; i < toX; i += step) {
