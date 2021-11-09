@@ -106,7 +106,7 @@ class Board {
         if (piece == null) return false;
         System.out.println(x+ " " + y + " " +toX+ " " + toY);
         if (!piece.can_move(this, x, y, toX, toY)) return false;
-        //if (this.colorIsWhite !=  this.field.get(x).get(y).get_color()) return false;
+        if (this.colorIsWhite !=  this.field.get(x).get(y).get_color()) return false;
         this.field.get(x).set(y, null);
         this.field.get(toX).set(toY, piece);
 
