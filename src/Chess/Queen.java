@@ -20,21 +20,22 @@ public class Queen extends Piece{
             return true;
         }
 
-        int step=0;
         if (x == toX || y == toY) {
-            if (toX >= x) {step = 1;} else step = -1;
-
-            for (int i = x + step; i < toX; i += step) {
-                if (!(board.get_piece(i, y) == null)) {
-                    return false;
+            if (x == toX) {
+                if (y > toY) {
+                    for (int i = y - 1; i > toY; i--)
+                        if (!(board.field.get(x).get(i) == null)) return false;
+                } else if (y < toY) {
+                    for (int i = y + 1; i < toY; i++)
+                        if (!(board.field.get(x).get(i) == null)) return false;
                 }
-            }
-
-            if (toY >= y) {step = 1;}else step = -1;
-
-            for (int i = y + step; i < toY; i += step) {
-                if (!(board.get_piece(x, i) == null)) {
-                    return false;
+            } else {
+                if (x > toX) {
+                    for (int i = x - 1; i > toX; i--)
+                        if (!(board.field.get(i).get(y) == null)) return false;
+                } else {
+                    for (int i = x + 1; i < toX; i++)
+                        if (!(board.field.get(i).get(y) == null)) return false;
                 }
             }
             return true;

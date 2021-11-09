@@ -58,6 +58,44 @@ class Board {
                 return this.field.get(x).get(y);
             }else return null;
     }
+    public boolean castling0(){
+        int row;
+        if (this.colorIsWhite) row = 0;
+        else row = 7;
+        if (!(this.field.get(row).get(0) instanceof Rook)) return false;
+        if (!(this.field.get(row).get(4) instanceof King)) return false;
+        if (this.field.get(row).get(0).is_moved()) return false;
+        if (this.field.get(row).get(4).is_moved()) return false;
+        if (this.field.get(row).get(1) != null || this.field.get(row).get(2) != null || this.field.get(row).get(3) != null)return false;
+
+        this.field.get(row).set(3, this.field.get(row).get(0));
+        this.field.get(row).set(2, this.field.get(row).get(4));
+        this.field.get(row).set(0, null);
+        this.field.get(row).set(4, null);
+        this.field.get(row).get(2).set_moved();
+        this.field.get(row).get(3).set_moved();
+        this.colorIsWhite = opponent(this.colorIsWhite);
+        return true;
+    }
+    public boolean castling7(){
+        int row;
+        if (this.colorIsWhite) row = 0;
+        else row = 7;
+        if (!(this.field.get(row).get(7) instanceof Rook)) return false;
+        if (!(this.field.get(row).get(4) instanceof King)) return false;
+        if (this.field.get(row).get(7).is_moved()) return false;
+        if (this.field.get(row).get(4).is_moved()) return false;
+        if (this.field.get(row).get(5) != null || this.field.get(row).get(6) != null || this.field.get(row).get(3) != null)return false;
+
+        this.field.get(row).set(5, this.field.get(row).get(7));
+        this.field.get(row).set(6, this.field.get(row).get(4));
+        this.field.get(row).set(7, null);
+        this.field.get(row).set(4, null);
+        this.field.get(row).get(5).set_moved();
+        this.field.get(row).get(6).set_moved();
+        this.colorIsWhite = opponent(this.colorIsWhite);
+        return true;
+    }
     public boolean correct_coords(int x, int y) {
         return ((0 <= x || x < 8) && (0 <= y || y < 8));
     }
@@ -68,7 +106,7 @@ class Board {
         if (piece == null) return false;
         System.out.println(x+ " " + y + " " +toX+ " " + toY);
         if (!piece.can_move(this, x, y, toX, toY)) return false;
-
+        //if (this.colorIsWhite !=  this.field.get(x).get(y).get_color()) return false;
         this.field.get(x).set(y, null);
         this.field.get(toX).set(toY, piece);
 

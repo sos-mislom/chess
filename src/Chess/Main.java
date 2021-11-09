@@ -2,6 +2,7 @@ package Chess;
 
 import javafx.util.Pair;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -9,18 +10,30 @@ public class Main {
 
     public static void main(String[] args) {
         Board board = new Board();
-        while (true){
+        while (true) {
             boolean flag = true;
-            int x=0, y=0, toX=0, toY = 0;
+            int x = 0, y = 0, toX = 0, toY = 0;
             sout_board(board);
             System.out.println("Команды:");
             System.out.println("    exit                     -- выход");
             System.out.println("    E2-E4                    -- ход из клетки E2 в E4");
-            if (board.current_player_color()){
+            System.out.println("    0-0-0                    -- рокировка в длинную сторону");
+            System.out.println("    0-0                      -- рокировка в короткую сторону");
+            if (board.current_player_color()) {
                 System.out.println("ХОД БЕЛЫХ");
-            }else System.out.println("ХОД ЧЕРНЫХ");
+            } else System.out.println("ХОД ЧЕРНЫХ");
             String command = input("! Введите команду \n! ");
-            if (command.equals("exit")){
+            if (Objects.equals(command, "0-0-0")){
+                if (!board.castling0()) {
+                    System.out.println("Кастлинг невозможен((");
+                }
+            }
+            else if (Objects.equals(command, "0-0")){
+                if (!board.castling7()) {
+                    System.out.println("Кастлинг невозможен((");
+                }
+            }
+            else if (command.equals("exit")){
                 break;
             }else{
                 char[] c = command.toLowerCase().toCharArray();
@@ -39,8 +52,8 @@ public class Main {
             }
             if (flag) {
                 Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> move = AI.bestMove(board, 1);
-                boolean s = board.move_piece(move.getKey().getValue(), move.getKey().getKey(), move.getValue().getValue(), move.getValue().getKey());
-                System.out.println(s);
+                //boolean s = board.move_piece(move.getKey().getValue(), move.getKey().getKey(), move.getValue().getValue(), move.getValue().getKey());
+                //System.out.println(s);
             }
         }
 

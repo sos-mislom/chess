@@ -15,11 +15,12 @@ public class Piece {
     public boolean can_move(Board board, int x, int y, int toX, int toY){
         if (!correct_coords(x, y) || !correct_coords(toX, toY)) return false;
         if (x == toX && y == toY) return false;
-        if (!Objects.equals(board.cell(toX, toY), "  ")){
+        if (!Objects.equals(board.get_piece(toX, toY), null)){
             if (board.get_piece(toX, toY).get_color() == this.colorIsWhite) return false;
         }
         return true;
     }
+
 
     public static boolean correct_coords(int x, int y) {
         return ((0 <= x || x < 8) && (0 <= y || y < 8));
