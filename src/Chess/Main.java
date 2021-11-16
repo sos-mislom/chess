@@ -52,8 +52,8 @@ public class Main {
             }
             if (flag) {
                 Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> move = AI.bestMove(board, 1);
-                //boolean s = board.move_piece(move.getKey().getValue(), move.getKey().getKey(), move.getValue().getValue(), move.getValue().getKey());
-                //System.out.println(s);
+                boolean s = board.move_piece(move.getKey().getValue(), move.getKey().getKey(), move.getValue().getValue(), move.getValue().getKey());
+                System.out.println(s);
             }
         }
 
